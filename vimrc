@@ -20,8 +20,9 @@ call vundle#end()
 
 filetype plugin indent on
 
-" Line numbers
+" Line & column numbers
 set number
+set ruler
 
 " Indentation & co.
 set autoindent
