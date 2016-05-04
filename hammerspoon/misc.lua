@@ -48,6 +48,8 @@ local function spaceInDirection(direction)
     local active_id = activeSpaceId(screen_spaces)
     local target_id = direction == "left" and active_id - 1 or active_id + 1
 
+    if target_id < 1 or target_id > #screen_spaces then return nil end
+
     return screen_spaces[target_id]
 end
 
@@ -57,6 +59,8 @@ function misc.moveSpace(win, direction)
     local mouse_position = win:zoomButtonRect()
     local old_mouse_position = hs.mouse.getAbsolutePosition()
     local target_space = spaceInDirection(direction)
+
+    if target_space == nil then return end
 
     mouse_position.x = mouse_position.x + mouse_position.w + 5
     mouse_position.y = mouse_position.y + mouse_position.h / 2
