@@ -15,7 +15,6 @@ Plugin 'jiangmiao/auto-pairs'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'ervandew/supertab'
-Plugin 'davidhalter/jedi-vim'
 Plugin 'nvie/vim-flake8'
 call vundle#end()
 
@@ -61,13 +60,16 @@ nmap <C-p> :CtrlP .<CR>
 
 cabbrev cp CtrlP
 cabbrev cws %s/\s\+$//e " Clear whitespace
+command W w
 
 " Misc
-let g:SuperTabDefaultCompletionType = "<c-x><c-n>"
+let g:SuperTabDefaultCompletionType = "<c-n>"
 let g:SuperTabLongestHighlight = 1
 set updatetime=250 " GitGutter update time
 autocmd FileType python setlocal completeopt-=preview
 command Flake8 call Flake8()
+
+set wildignore+=__pycache__,env,.git
 
 if has("gui_macvim")
   let macvim_hig_shift_movement = 0
