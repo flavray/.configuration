@@ -7,9 +7,18 @@ local screen = require "hs.screen"
 local window = require "hs.window"
 
 local misc = require "misc"
-local weather = require "weather"
+-- local weather = require "weather"
 
 hs.window.animationDuration = 0
+
+function hs.window.upper(win)
+    local frame = win:screen():fullFrame()
+    frame.x = frame.x + 4
+    frame.y = frame.y + 20
+    frame.w = frame.w - 10
+
+    win:setFrame(frame)
+end
 
 function hs.window.lower(win)
     local frame = win:screen():fullFrame()
@@ -87,6 +96,7 @@ local function setupWindows()
     end
 end
 
+--[[
 local function welcome()
     text = {"Hey!"}
 
@@ -109,10 +119,11 @@ local function welcome()
     text = table.concat(text, "\n")
     alert.show(text, 5)
 end
+]]--
 
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, "R", hs.reload)
 hs.hotkey.bind({"cmd", "ctrl"}, "A", setupWindows)
-hs.hotkey.bind({"cmd", "alt", "ctrl"}, "W", welcome)
+-- hs.hotkey.bind({"cmd", "alt", "ctrl"}, "W", welcome)
 
 hs.hotkey.bind({"cmd", "ctrl"}, "left", function()
     hs.window.focusedWindow():left()
@@ -123,7 +134,7 @@ hs.hotkey.bind({"cmd", "ctrl"}, "right", function()
 end)
 
 hs.hotkey.bind({"cmd", "ctrl"}, "up", function()
-    hs.window.focusedWindow():maximize()
+    hs.window.focusedWindow():upper()
 end)
 
 hs.hotkey.bind({"cmd", "ctrl"}, "down", function()
@@ -143,4 +154,5 @@ hs.hotkey.bind({"alt", "ctrl"}, "right", function()
 end)
 
 hs.wifi.watcher.new(misc.ssidChangedCallback):start()
-welcome()
+-- welcome()
+hs.alert.show("Hey!")
