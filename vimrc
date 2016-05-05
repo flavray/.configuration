@@ -8,7 +8,6 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 Plugin 'scrooloose/nerdtree'
-Plugin 'jlanzarotta/bufexplorer'
 Plugin 'vim-scripts/mru.vim'
 Plugin 'rbgrouleff/bclose.vim'
 Plugin 'jiangmiao/auto-pairs'
@@ -17,6 +16,10 @@ Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'ervandew/supertab'
 Plugin 'davidhalter/jedi-vim'
 Plugin 'nvie/vim-flake8'
+
+if v:version >= 749
+  Plugin 'jlanzarotta/bufexplorer'
+endif
 call vundle#end()
 
 filetype plugin indent on
@@ -49,12 +52,6 @@ set gfn=Inconsolata:h14
 " autocmd VimEnter * wincmd p
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
-" Close buffer using Cmd+W
-macmenu &File.Close key=<nop>
-nmap <D-w> :CommandW<CR>
-imap <D-w> <Esc>:CommandW<CR>
-nmap <C-w> <Esc>:Bclose<CR>
-
 " Key bindings
 nmap <M-Tab> :BufExplorer<CR>
 nmap <C-a> :NERDTreeToggle<CR>
@@ -79,4 +76,10 @@ set wildignore+=__pycache__,env,.git
 
 if has("gui_macvim")
   let macvim_hig_shift_movement = 0
+
+  " Close buffer using Cmd+W
+  macmenu &File.Close key=<nop>
+  nmap <D-w> :CommandW<CR>
+  imap <D-w> <Esc>:CommandW<CR>
+  nmap <C-w> <Esc>:Bclose<CR>
 endif
