@@ -134,7 +134,7 @@ hs.hotkey.bind({"cmd", "ctrl"}, "right", function()
 end)
 
 hs.hotkey.bind({"cmd", "ctrl"}, "up", function()
-    hs.window.focusedWindow():upper()
+    hs.window.focusedWindow():maximize()
 end)
 
 hs.hotkey.bind({"cmd", "ctrl"}, "down", function()
