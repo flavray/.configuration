@@ -15,6 +15,7 @@ Plugin 'jiangmiao/auto-pairs'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'ervandew/supertab'
+Plugin 'davidhalter/jedi-vim'
 Plugin 'nvie/vim-flake8'
 call vundle#end()
 
@@ -44,8 +45,8 @@ colorscheme material-theme
 set gfn=Inconsolata:h14
 
 " Automatically show NERDTree, close vim if NERDTree is the only buffer left
-autocmd VimEnter * if &filetype !=# 'gitcommit' | NERDTree | endif
-autocmd VimEnter * wincmd p
+" autocmd VimEnter * if &filetype !=# 'gitcommit' | NERDTree | endif
+" autocmd VimEnter * wincmd p
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 " Close buffer using Cmd+W
@@ -55,7 +56,8 @@ imap <D-w> <Esc>:CommandW<CR>
 nmap <C-w> <Esc>:Bclose<CR>
 
 " Key bindings
-nmap <C-a> :BufExplorer<CR>
+nmap <M-Tab> :BufExplorer<CR>
+nmap <C-a> :NERDTreeToggle<CR>
 nmap <C-l> :vs<CR>
 nmap <C-p> :CtrlP .<CR>
 
@@ -69,6 +71,9 @@ let g:SuperTabLongestHighlight = 1
 set updatetime=250 " GitGutter update time
 autocmd FileType python setlocal completeopt-=preview
 command Flake8 call Flake8()
+let g:flake8_show_quickfix = 0
+let g:flake8_show_in_gutter = 1
+autocmd BufWritePost python execute "call Flake8()"
 
 set wildignore+=__pycache__,env,.git
 
